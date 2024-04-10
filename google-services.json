@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1005645984024",
+    "project_id": "acta-3866d",
+    "storage_bucket": "acta-3866d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005645984024:android:5e9b678ca37584752c6e6d",
+        "android_client_info": {
+          "package_name": "com.harsh9539.medicient"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB69mgewjeRbgcIxMzGmVk7XYwT3vLkdf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

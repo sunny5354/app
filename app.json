@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "Acta",
+    "slug": "acta",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/appIcon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#1CB6B6"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/appIcon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+        }
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.sunny5354.acta"
+    },
+    "web": {
+      "favicon": "./assets/appIcon.png"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "owner": "sunny5354",
+ "extra": {
+      "eas": {
+        "projectId": "5d5759bf-c530-40f9-8ad1-1ca4d7ff1310"
+      }
+    }
+
+  }
+}
