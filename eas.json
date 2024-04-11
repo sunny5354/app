@@ -7,7 +7,7 @@
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://acta-staffing-api.ashusharma.in/api/v1"
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1"
       },
       "channel": "development"
     },
@@ -17,13 +17,13 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://acta-staffing-api.ashusharma.in/api/v1"
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1"
       },
       "channel": "preview"
     },
     "production": {
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://acta-staffing-api.ashusharma.in/api/v1"
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1"
       },
       "channel": "production"
     }
