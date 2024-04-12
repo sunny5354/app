@@ -25,7 +25,7 @@ const Welcome = ({ navigation, route }: { navigation: ScreenNavigationProp, rout
           resizeMode='contain'
         />
         <View className='flex-1 items-center h-40' style={{ gap: 4 }}>
-          <Typography class='text-center text-xl font-PoppinsMedium h-14'>#1 Staffing Platform for Hospice & Home Health </Typography>
+          <Typography class='text-center text-xl font-PoppinsMedium h-14'>#1 Staffing Platform for Hospice & Home Health testing by Sunny for </Typography>
           <Typography variant='sm' class='text-center h-20 text-gray-400'>Pick up local shifts with top-rated agencies. Work as per own choice & preference. Gain freedom & flexibility.</Typography>
         </View>
       </View>
