@@ -33,9 +33,9 @@ const FakeMap = ({ location }: { location: string }) => {
   const [myLong, setMyLong] = useState(-122.432);
 
   const fetchLocation = async () => {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=<YOUR_GOOGLE_MAPS_API_KEY>`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8`;
     const res = await axios.get(url);
-    setLat(res.data.results[0].geometry.location.lat);
+    setLat(res.data.results[0].geometry.location.lat); 
     setLong(res.data.results[0].geometry.location.lng);
     mapRef.current?.animateToRegion(
       {

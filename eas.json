@@ -7,7 +7,8 @@
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1"
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1",
+        "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
       },
       "channel": "development"
     },
@@ -17,17 +18,19 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1"
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1",
+        "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
       },
       "channel": "preview"
     },
     "production": {
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1"
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1",
+        "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
       },
       "channel": "production"
     }
-  },
+  }, 
   "submit": {
     "production": {}
   }
