@@ -26,9 +26,9 @@
       "package": "com.sunny5354.acta",
       "config": {
         "googleMaps": { 
-          "apiKey": "<my api key is here>"
-        }
-      }
+          "apiKey": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
+        } 
+      }  
     },
     "web": {
       "favicon": "./assets/appIcon.png"

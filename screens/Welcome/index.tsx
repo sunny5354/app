@@ -21,7 +21,7 @@ const Welcome = ({ navigation, route }: { navigation: ScreenNavigationProp, rout
         <Image
           source={welcome}
           alt='welcome'
-          className='h-40 w-full'
+          className='h-40 w-full' 
           resizeMode='contain'
         />
         <View className='flex-1 items-center h-40' style={{ gap: 4 }}>
