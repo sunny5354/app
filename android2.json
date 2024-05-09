@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "acta-staffing-app",
+  "private_key_id": "aa8b40694d64a6e4de603563491c23a7e781aaf7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCZc6IAGXHbmoGH\nghjqQFrZiSzfZRNUZzoGFl9T5+mOWC2EjyDIdpPR6ZxSx5P1/BF7CZd/eo8M2Iv5\noT7Hwzniv2kaT3Sxc3cNlYuVsVl4rrx8bJQ0hyOdG6EmuwgBxd3syDT/T4hGSZjI\ngIS2HvDjBjEBYRiNwvI2bY0htG2Tokm4GgFPbGE0CpuQ15A0UIFnsREYps7bnLS2\nxAdIU5yb0daBGj7Toov8d20hdqw8CbybP5xhAXZBPspIOD2To0glKu620A/Oj5sx\nq9sAK7VsMmy9gjf5c3dz7uexNw6CGLY6EhU9uX17qhSql9+e47MNeni7xn/XCtVP\n5y59/ms5AgMBAAECggEACXq3sLrhqje+tbDHOj1Uf2i2cWxsh8PCtVqPc/75EhaH\nZU90Ln4IvqhoRELY9JKoP8oFZlYbXSdJalfYKX35ZvT9GKd85XNlEN1CnLIyfT6K\nHUOV2jLY890flOVr5rQi8/wgLf9rQzBLtGMgD6IUrmmVAGlPm35F+S/GTqU3Oa3t\n0EJkHqnvciCXJFvz33AZp/a9cna7AQ6alNR7+ec9buefntm3IynlD9/JbJV+YN9D\n4ECVmnkL4BCgDFxWQn00tKZhmV1jcIsSd2dCFOP8XVKDdPKl6CHz+RBfll+VFv0M\n6RSx6DqqaKw6fyf0+JkS5I+rtFxMZfJ6AZooApOLKQKBgQDNL0uyzv5/TKvruYGK\n1rkA/VmFY/pUIsSvFrveQUruhOkkEfzdKW03iF+0Fk9ArcM9SknMJbL/4Bqn08Or\nc7lafG1qTEsP2EWX3C4MRC5niF8aYbHx9L2kNTN4oDSc5aNeEy+8u1YtjZKA8RQH\nYooMApbYODQHijlc1iD9/hjm/QKBgQC/dHakLegCt8jWq2odTmridF77NGzmfCon\nPOC/HmqjhTdDRYSECjHGSbxlJCLmviJH0/NTJw/3RgOYCcGlAsPxx0bH7waTxjMP\nCJ3+h4BnAXU+mcaLdmGHTQBA9CoX6QZobRkbRc5LUwD13rsSJ2rKELPeewkUR/UK\n0vxvv/LP7QKBgGoAEgpZF28qa/LGjh7s2Pyi5dmckdlfcN7HTtz+PDjG3y7sQAb9\nfNfgkxiVIfJXEnMaas+VdkjsPLkRFJgBm/McLuZobarM3v8aF4vsuVBxSjh12hkW\nh9ZKScH6edPIasKSBOpqmZXE+re0U9WQ2aJkwAsJ1g9DIGlOkhLFb5X9AoGAcZ0A\nRr+DPhGoGlQQnaGKZiYesz3SHhiyvyQuTtwS9kS4nbAkSmLuVLgvF2oRWBKerzdE\n3ySAIgInYdLwWibA9rqF82GR6qGkbRh1AbWRag8Ab4y7uMkgaTU1oFYEoLnE9rU/\nP+L139c6660oIEbJ5W1x/+XNZn6pGKpJ6VrkEaUCgYEAu12BHrzE5GaBI+7zRDQV\niuhNBpYVUSis9JnkNKgtZIcz5d5lf7QO98FonqSjMgoyy7+2knLs1sm0H1Od2rco\n6u8S0GSYEmOwecPhpyRDJx6nebEXdjdgtpiKXnDnRyMrzN6LdudWoHByHMu/ZzOh\n/TWFwj4JbuRc7FpM656XL8w=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-y5unl@acta-staffing-app.iam.gserviceaccount.com",
+  "client_id": "111617831826298450936",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-y5unl%40acta-staffing-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
