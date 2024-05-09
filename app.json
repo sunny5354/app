@@ -23,7 +23,12 @@
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.sunny5354.acta"
+      "package": "com.sunny5354.acta",
+      "config": {
+        "googleMaps": { 
+          "apiKey": "<my api key is here>"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/appIcon.png"
