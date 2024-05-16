@@ -8,7 +8,7 @@ import { getDocumentDetails } from "../../http/documents/documents";
 import { DocumentDataProps } from "../../types/documents";
 
 
-const DocumentProfile: React.FC<ModalChildrenProps & { id: string }> = ({
+const DocumentProfile: React.FC<ModalChildrenProps & { id: string, }> = ({
   modalVisible,
   handleModalVisible,
   id,
@@ -18,7 +18,7 @@ const DocumentProfile: React.FC<ModalChildrenProps & { id: string }> = ({
   const [documentDetails, setDocumentDetails] = useState<DocumentDataProps | null>(null);
 
   useEffect(() => {
-    const fetchPatientDetails = async () => {
+    const fetchDocumentDetails = async () => {
       try {
         const res = await getDocumentDetails(id);
         // console.log(res);
@@ -27,7 +27,7 @@ const DocumentProfile: React.FC<ModalChildrenProps & { id: string }> = ({
         console.log(error.response.data);
       }
     }
-    fetchPatientDetails();
+    fetchDocumentDetails(); 
   }, [modalVisible])
 
   if (!documentDetails) return null;

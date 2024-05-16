@@ -1,9 +1,10 @@
-import { View, Pressable, Linking } from 'react-native'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import { View, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import { backgroundShadow } from '../../backgroundShadow'
 import { DocumentDataProps } from '../../../types/documents'
 import Typography from '../../Typography/Typography'
 import DocPdfViewModal from '../../Modals/DocPdfViewModal';
+
  
 const InfoTypography = ({ label, value }: { label: string, value: string }) => {
   return (

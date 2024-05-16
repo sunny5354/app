@@ -4,18 +4,20 @@ import Typography from '../../../components/Typography/Typography';
 import { JobDataProps } from '../../../types/jobs';
 import * as Linking from 'expo-linking';
 import PatientProfile from '../../../components/PatientProfile';
+import DocumentProfile from '../../../components/DocumentProfile';
 import ClinicianBadge from '../../../components/ClinicianBadge';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 const JobTypeInfoCard = ({ data }: { data: JobDataProps }) => {
   const [patientProfieModal, setPatientProfileModal] = useState(false);
+  const [documentProfieModal, setDocumentProfileModal] = useState(false);
   const [clinicanBadgeModal, setClinicianBadgeModal] = useState(false);
 
   return (
     <View className='bg-[#5280F7] rounded-lg px-4 py-6' style={{ gap: 2 }}>
       <View className='flex-row justify-between'>
-        <Typography variant='sm' class='text-white'>Job Id: {data.jobId}</Typography>
+        <Typography variant='sm' class='text-white'>Job Id: {data.jobId}</Typography> 
         <Pressable
           onPress={() => { setClinicianBadgeModal(true); }}
           className='bg-red-500 px-6 py-2 flex justify-center items-center rounded-lg'>
@@ -38,6 +40,12 @@ const JobTypeInfoCard = ({ data }: { data: JobDataProps }) => {
         </Pressable>
         <Typography variant='sm' class='text-white'>Agency :</Typography>
         <Typography class='text-white font-PoppinsMedium'>{data.agencyName}</Typography>
+        <Pressable onPress={() => { setDocumentProfileModal(true) }} className='bg-[#1B2850] p-2 w-40 justify-center items-center rounded-lg'>
+          <View className="flex-row items-center" style={{ gap: 10 }}>
+            <FontAwesome name="vcard" size={16} color="white" />
+            <Typography variant='sm' class='text-white'> Agency Forms</Typography> 
+          </View>
+        </Pressable>
         <Pressable
           onPress={() => {
             Linking.openURL(`tel:${data.agencyPhone}`)
@@ -54,6 +62,11 @@ const JobTypeInfoCard = ({ data }: { data: JobDataProps }) => {
         modalVisible={patientProfieModal}
         handleModalVisible={() => { setPatientProfileModal(false) }}
         id={data._id!}
+      />
+      <DocumentProfile
+        modalVisible={documentProfieModal}
+        handleModalVisible={() => { setDocumentProfileModal(false) }}
+        id={data.agencyId}
       />
       <ClinicianBadge
         modalVisible={clinicanBadgeModal}

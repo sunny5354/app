@@ -25,10 +25,10 @@
       "googleServicesFile": "./google-services.json",
       "package": "com.sunny5354.acta",
       "config": {
-        "googleMaps": { 
+        "googleMaps": {
           "apiKey": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
-        } 
-      }  
+        }
+      }
     },
     "web": {
       "favicon": "./assets/appIcon.png"
@@ -44,6 +44,9 @@
     },
     "updates": {
       "url": "https://u.expo.dev/5d5759bf-c530-40f9-8ad1-1ca4d7ff1310"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

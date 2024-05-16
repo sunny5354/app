@@ -93,11 +93,11 @@ const DocPdfViewModal: React.FC<PdfViewProps> = ({
               {Platform.OS === 'android' && <Button
                 disabled={isBtnLoading}
                 onPress={() => {
-                  navigation.navigate("DownloadWeb", {
+                  navigation.navigate("DownloadWeb", {  
                     url: pdfObject.url,
                   });
-                  handleModalVisible();
-                }} my={0}>Download</Button>}
+                  handleModalVisible(); 
+                }} my={0}>Download</Button>} 
               {Platform.OS === 'ios' && <Button
                 disabled={isBtnLoading}
                 onPress={() => {

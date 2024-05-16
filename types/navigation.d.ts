@@ -44,7 +44,8 @@ export type RootStackParamList = {
     MessageScreen:undefined,
     JobTypeInfoScreen:undefined,
     PastJobs:undefined,
-    PastJobInfoScreen:undefined
+    PastJobInfoScreen:undefined,
+
 };
 
 export type ScreenNavigationProp = NativeStackScreenProps<
@@ -63,7 +64,8 @@ export type ScreenNavigationProp = NativeStackScreenProps<
     Account,
     Education,
     ChangePassword,
-    DownloadWeb
+    DownloadWeb,
+
 >;
 
 export type ScreenRouteProp = NativeStackScreenProps<
@@ -82,7 +84,8 @@ export type ScreenRouteProp = NativeStackScreenProps<
     Account,
     Education,
     ChangePassword,
-    DownloadWeb
+    DownloadWeb,
+
 >;
 
 export type ScreenProps = {
@@ -90,6 +93,10 @@ export type ScreenProps = {
     route: HomeScreenRouteProp;
 };
 
+export type DocumentScreenProps = {
+    navigation: HomeScreenNavigationProp;
+    route: HomeScreenRouteProp;
+};
 
 // type HomeScreenNavigationProp = BottomTabNavigationProp<
 //     HomeScreenParams,
