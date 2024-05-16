@@ -9,12 +9,13 @@ export const backgroundShadow = StyleSheet.create({
     // adding Shadow for andorid
     shadowColor: '#000',
     elevation: 4,
+    
     // adding shadow effect for ios
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 10,
 
-    marginTop: 30,
+    marginTop: 10,
     borderWidth: 1,
     borderColor: colors.border,
     padding: 16,

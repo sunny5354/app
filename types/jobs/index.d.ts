@@ -14,6 +14,7 @@ export interface JobDataProps {
   jobDateAndTime: string;
   jobStatus?: string;
   agencyName: string;
+  agencyId: string;
   agencyPhone?: string;
   location: string;
   payRate: string;
