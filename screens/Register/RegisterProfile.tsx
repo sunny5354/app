@@ -113,7 +113,7 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
     phone: string;
     pincode: string;
     city: string;
-    socialSecurity: string
+   
   }
 
   const validationSchema = yup.object({
@@ -125,7 +125,7 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
     phone: yup.string().required("Mobile Number is required").min(10, "Please enter a valid phone number").max(10),
     pincode: yup.string().required("Required").min(5, "Min 6").max(5),
     city: yup.string().required("Required"),
-    socialSecurity: yup.string().required("Required")
+   
   })
 
   const formik = useFormik({
@@ -138,7 +138,7 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
       phone: "",
       pincode: "",
       city: "",
-      socialSecurity: ""
+     
     },
     validationSchema: validationSchema,
     onSubmit: async (values: FormValues) => {
@@ -193,8 +193,7 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
         },
         "ethnicity": selectedEthinicity.value,
         "workProfile": selectedWorkProfile.value,
-        "language": selectedLanguage,
-        "socailSecurityNumber": values.socialSecurity,
+        "language": selectedLanguage,        
         "usCitizen": usCitizen,
         "usWorkAuthorization": isAuthWork,
         "agency": selectedAgencyName.value
@@ -605,20 +604,7 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
                 variant='xsm' class='flex-[1.5]'>{user.isPhoneVerified ? "Your phone is verified." : "Your phone is not verified"}</Typography>
             </View>
           </View>
-          <Input
-            classView='mt-4'
-            label='Social Security No.'
-            placeholder='Social Security No.'
-            value={formik.values.socialSecurity}
-            onChangeText={formik.handleChange("socialSecurity")}
-            onBlur={formik.handleBlur("socialSecurity")}
-            isError={
-              !!formik.touched.socialSecurity &&
-              !!formik.errors.socialSecurity
-            }
-            error={formik.errors.socialSecurity}
-            onSubmitEditing={formik.submitForm as () => void}
-          />
+      
           <View style={{ gap: 15, marginVertical: 10 }}>
             <MenuDropDown label='Ethnicity*' selectedValue={selectedEthinicity} setSelectedValue={setSelectedEthinicity} data={ethinicity} />
             <MenuDropDown label='Work Profile*' selectedValue={selectedWorkProfile} setSelectedValue={setSelectedWorkProfile} data={workProfile} />
@@ -680,3 +666,4 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
     </ScrollView>
   );
 }
+

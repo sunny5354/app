@@ -13,6 +13,7 @@ export default function DownloadWeb({ navigation, route }: ScreenProps) {
     useEffect(() => {
         if (progress === 1) {
             navigation.goBack();
+           
         }
     }, [progress])
 
