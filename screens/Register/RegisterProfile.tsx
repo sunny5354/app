@@ -219,10 +219,10 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
 
   const sendOTP = async () => {
     const num = (formik.values.phone);
-    if (num.length !== 10) {
-      errorToast("Phone must be of 10digits");
-      return;
-    }
+   // if (num.length !== 10) {
+   //   errorToast("Phone must be of 10digits");
+   //   return;
+  //  }   
     try {
       const res = await sendAccountVerifyPhoneCode(formik.values.phone);
       console.log("account phone send otp =>", res);

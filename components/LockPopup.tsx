@@ -30,13 +30,13 @@ const LockPopup = () => {
   return (
     <View className='flex-1 justify-center items-center'>
       <View className='bg-primaryLightGreen w-9/12 justify-center items-center h-40 px-6 rounded-md' style={{ gap: 10 }}>
-        <Typography class='text-white text-center'>Attention!</Typography>
+        <Typography class='text-white text-center'>You're Signed Up !</Typography>
         {
           (role !== "agency-clinician" && userStatus !== "Active")
             ?
-            <Typography variant='xsm' class='text-white text-center leading-5'>Your account still not activated. You need to complete all items listed on your Profile and submit, before start using the App.</Typography>
+            <Typography variant='xsm' class='text-white text-center leading-5'>You're successfully signed up on Acta. You need to contact your Agency to complete your credentials before start using the App.</Typography>
             :
-            <Typography variant='xsm' class='text-white text-center leading-5'>Your account still not activated. You have to contact your agency to complete your profile, before start using the App.</Typography>
+            <Typography variant='xsm' class='text-white text-center leading-5'>You're successfully signed up on Acta. You need to contact your Agency to complete your credentials before start using the App.</Typography>
         }
       </View>
     </View>
