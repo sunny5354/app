@@ -16,6 +16,7 @@
     "submit:android": "eas submit --platform android --latest",
     "submit:all": "eas submit --latest",
     "update": "eas update"
+
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
