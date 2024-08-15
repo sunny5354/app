@@ -43,7 +43,7 @@ const PointOfCare = ({ navigation }: ScreenProps) => {
   return (
     <View className='flex-1 bg-background'>
       <BackHeader
-        title='Point Of Care'
+        title='QA Documentation'
         handlePress={() => { navigation.goBack() }}
       />
       <ScrollView>

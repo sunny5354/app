@@ -23,10 +23,10 @@ const Profile = ({ navigation }: { navigation: ScreenNavigationProp }) => {
     { id: 5, title: "Competency/Skillset ", complete: false, to: "SkillSet" },
     // { id: 6, title: "Work Information", complete: false, to: "WorkExperience" },
     { id: 7, title: "Job Preference", complete: false, to: "WorkPrefrence" },
-    { id: 8, title: "Payment Account", complete: false, to: "Payment" },
+  //  { id: 8, title: "Payment Account", complete: false, to: "Payment" },
     // { id: 9, title: "Licenses", complete: false, to: "License" },
-    { id: 10, title: "Covid-19 Screening", complete: false, to: "Covid" },
-    { id: 11, title: "Tax Document", complete: false, to: "Tax" },
+   // { id: 10, title: "Covid-19 Screening", complete: false, to: "Covid" },
+  //  { id: 11, title: "Tax Document", complete: false, to: "Tax" },
     { id: 12, title: "Background Check", complete: false, to: "BackgroundCheck" }
   ])
 

@@ -25,6 +25,9 @@ import DownloadWeb from "../components/WebView/DownloadWeb";
 import TaxDocs from "../screens/Profile/TaxDocs";
 import JobInfoScreen from "../screens/Jobs/InfoScreen";
 import AppliedJobs from "../screens/AppliedJobs";
+import OnCall from "../screens/OnCall";
+import Earnings from "../screens/Earnings";
+import HelpSupport from "../screens/HelpSupport";
 import AssignedJobs from "../screens/AssignedJobs";
 import PointOfCare from "../screens/PointOfCare";
 import AppliedJobInfoScreen from "../screens/AppliedJobs/InfoScreen";
@@ -64,6 +67,9 @@ const AllNavigator = () => {
             <Stack.Screen name="AppliedJobInfoScreen" component={AppliedJobInfoScreen} />
             <Stack.Screen name="AssignedJobInfoScreen" component={AssignedJobInfoScreen} />
             <Stack.Screen name="PastJobInfoScreen" component={PastJobInfoScreen} />
+            <Stack.Screen name="OnCall" component={OnCall} />
+            <Stack.Screen name="Earnings" component={Earnings} />
+            <Stack.Screen name="HelpSupport" component={HelpSupport} />
             <Stack.Screen name="AppliedJobs" component={AppliedJobs} />
             <Stack.Screen name="MessageScreen" component={MessageScreen} />
             <Stack.Screen name="AssignedJobs" component={AssignedJobs} />

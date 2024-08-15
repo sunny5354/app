@@ -193,15 +193,15 @@ export const ProfilePageData = [
 
 export const MenuData = [
     { id: 1, title: "Profile", img: user, to: "Profile" },
+    { id: 33, title: "Job Preference", img: workPrefrence, to: "WorkPrefrence" },
     { id: 37, title: "Schdeduled Jobs", img: pastJobs, to: "Schedule" },
     { id: 2, title: "Assigned Jobs", img: assignedJobs, to: "AssignedJobs" },
     { id: 30, title: "Applied Jobs", img: appliedJobs, to: "AppliedJobs" },
-    { id: 31, title: "Point of Care", img: pointofCare, to: "PointOfCare" },
-    { id: 6, title: "On Call", img: security, to: "Profile" },
+    { id: 31, title: "QA Documentation", img: pointofCare, to: "PointOfCare" },
+    { id: 6, title: "On Call", img: security, to: "OnCall" },
     { id: 32, title: "Past Jobs", img: pastJobs, to: "PastJobs" },
-    { id: 33, title: "Job Preference", img: workPrefrence, to: "WorkPrefrence" },
-    { id: 4, title: "Earnings", img: earnings, to: "Profile" },
-    { id: 5, title: "Help & Support", img: helpAndSupport, to: "Profile" },
+    { id: 4, title: "Earnings", img: earnings, to: "Earnings" },
+    { id: 5, title: "Help & Support", img: helpAndSupport, to: "HelpSupport" },
     { id: 7, title: "Log Out", img: logout, to: "Profile" },
 ]
 
