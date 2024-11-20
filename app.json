@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "Acta",
+    "slug": "medicent",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/appIcon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#1CB6B6"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/appIcon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.sunny5354.acta",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/appIcon.png"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "owner": "sunny5354",
+    "extra": {
+      "eas": {
+        "projectId": "332365e4-a143-4dd2-a37a-9c20c5e58760"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/332365e4-a143-4dd2-a37a-9c20c5e58760"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
