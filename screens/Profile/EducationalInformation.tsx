@@ -42,7 +42,6 @@ const EducationalInformation = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [isUpdateId, setIsUpdateId] = useState<string>("");
 
-
   const [validateData, setvalidateData] = useState({
     label: "Select Validity", value: "0"
   })
@@ -56,10 +55,6 @@ const EducationalInformation = () => {
     value: false
   }  
   ]
-
-  const [credentialType, setCredentialType] = useState([{
-    label: "Nothing to show", value: "0"
-  }])
 
   const [courseData, setCourseData] = useState([{
     label: "Nothing to show",
@@ -181,6 +176,7 @@ const EducationalInformation = () => {
           degree: values.degree,
           institution: values.institution,
         }
+       
         //return;
         const result = await addEducation(obj);
         successToast(result.message ?? "Education Added");
@@ -222,13 +218,15 @@ const EducationalInformation = () => {
         courseType: formik.values.courseType,
         courseName: formik.values.courseName,// @ts-ignore
         city: formik.values.city,
-        state:formik.values.state,
-        issued: formik.values.issued,
-        hasValidity: formik.values.hasValidity,
-        validUpTo: formik.values.validUpTo,
+        state:formik.values.state, // @ts-ignore
+        issued: issuedDate,
+        hasValidity: validateData?.value, // @ts-ignore
+        validUpTo: valildDate,
         degree: formik.values.degree,
         institution: formik.values.institution
       }
+      // console.log(obj);
+      // return;
       const result = await editEducation(obj, isUpdateId);
       successToast(result.message ?? "Education Updated");
       formik.resetForm();
@@ -236,7 +234,7 @@ const EducationalInformation = () => {
       setResetUploadCard(!resetUploadCard);
       setRefresh(!refresh);
       setIsUpdate(false);
-      setIsUpdateId("");
+      setIsUpdateId("");// @ts-ignore
     } catch (error: any) {
       errorToast(error.response.data.message ?? "Error Occured!");
     }
@@ -266,6 +264,7 @@ const EducationalInformation = () => {
   }, [isFocused])
 
   const onUpdate = (data: EducationDataInfoProps) => {
+    console.log("update", data);
     setUploadedDoc({
       name: data.certificate.name,
       url: data.certificate.url,
@@ -278,8 +277,14 @@ const EducationalInformation = () => {
     formik.setFieldValue("courseName", data.courseName);
     formik.setFieldValue("city", data.city);
     formik.setFieldValue("state", data.state);
-    formik.setFieldValue("issued", data.issued);
-    formik.setFieldValue("hasValidity", data.hasValidity);
+    // formik.setFieldValue("issued", data.issued);
+    // setIssuedDate(data?.issued);
+    // setvalildDate(data?.validUpto);
+    //formik.setFieldValue("hasValidity", data.hasValidity);
+    // console.log("values",data.hasValidity); 
+    setIssuedDate(new Date(data?.issued));
+    setvalildDate(new Date(data?.validUpTo));
+    // @ts-ignore
     setIsUpdateId(data._id);
     setIsUpdate(true);
     if (scroll.current) {
@@ -291,8 +296,21 @@ const EducationalInformation = () => {
   const fetchEducationInformation = async () => {
     try {
       const result = await getEducation();
-      console.log("Educations", result);
+      console.log("Educations1", result);
       setEducationInfo(result.educations);
+      if(result?.educations[0]?.courseType) {
+        setCourseType({ label: result.educations[0].courseType, value: result.educations[0].courseType });
+      }
+
+      if(result?.educations[0]?.state) {
+        setStates({ label: result.educations[0].state, value: result.educations[0].state });
+      }
+   
+      if(result?.educations[0]?.hasValidity) {
+        setvalidateData({ label: "Yes", value: result.educations[0].hasValidity });
+      } else {
+        setvalidateData({ label: "No", value: result.educations[0].hasValidity });
+      }
       
     } catch (error: any) {
       console.log(error.response.data.message);
@@ -318,26 +336,36 @@ const EducationalInformation = () => {
   }, [refresh])
 
 
-  if (!educationInfo) return <Loading />
+  //if (!educationInfo) return <Loading />
 
   return (
     <View className='flex-1 relative bg-white'>
-      <ScrollView ref={scroll} className='p-4 bg-white flex-1' contentContainerStyle={{ paddingBottom: 120 }}>
-        <Typography class='font-PoppinsSemiBold'>Add Educational Attainment</Typography>
+      <ScrollView ref={scroll} className='p-3 bg-white flex-1' contentContainerStyle={{ paddingBottom: 120 }}>
+      {educationInfo?.length && educationInfo?.length == 0 ?
+        <Typography class='font-PoppinsSemiBold'>
+          Add Educational Attainment
+        </Typography>
+        :
+        null
+      }
+        
         <View className='mt-5' />
-        <View className='flex-1' style={{ gap: 25 }}>
-          {educationInfo.length && educationInfo.length > 0 ?
-            educationInfo.map((e, i) => (
+        <View className={`${isUpdate ? 'hidden flex-1' : 'block flex-1'}`} style={{ gap: 25 }}>
+          {educationInfo?.length && educationInfo?.length > 0 ?
+            educationInfo?.map((e, i) => (
               <EducationQualifyCard onUpdate={onUpdate} setRefresh={setRefresh} education={e} key={i} />
             ))
             : (
-              <View className='justify-center items-center'>
+              <View className='justify-center items-center bottom-4'>
                 <Typography variant='xl'>No Education Detail Added</Typography>
               </View>
             )}
         </View>
-        <Divider />
-        <View style={styles.backgroundShadow}>
+        {educationInfo?.length && educationInfo?.length == 0 ? <Divider /> : null }
+        <Typography class='font-PoppinsSemiBold'>
+          Add Educational Attainment
+        </Typography>
+        <View style={styles.backgroundShadow} className='top-2'>
           {/* @ts-ignore */}
           <MenuDropDown label='Select Course Type*' name="courseType" selectedValue={courseType} setSelectedValue={setCourseType} data={courseData} />
           <Input

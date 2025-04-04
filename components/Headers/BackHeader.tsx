@@ -8,7 +8,7 @@ const BackHeader = ({ handlePress, title }: { handlePress: () => void, title: st
   return (
     <View className='flex-row w-full h-14 bg-primaryGreen px-5 justify-between items-center rounded-b-xl'>
       <MaterialIcons onPress={handlePress} name="arrow-back-ios" size={20} color="white" />
-      <Typography variant='xl' class='text-white'>{title}</Typography>
+      <Typography variant='lg' class='text-white'>{title}</Typography>
       <View></View>
     </View>
   )

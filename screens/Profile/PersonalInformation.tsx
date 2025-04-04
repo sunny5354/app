@@ -536,7 +536,7 @@ const PersonalInformation = ({ navigation }: { navigation: ScreenNavigationProp 
             />
             <Input label='Mobile Number'
               placeholder='Enter Mobile Number'
-              value={profReference1?.mobileNo.toString()}
+              value={profReference1?.mobileNo?.toString()}
               onChangeText={(val) => setProfreference1(prevState => ({ ...prevState,mobileNo: val}))}
               keyboardType="numeric"
               classView='flex-1'
@@ -568,20 +568,21 @@ const PersonalInformation = ({ navigation }: { navigation: ScreenNavigationProp 
             <Input label='Mobile Number'
               placeholder='Enter Mobile Number'
               keyboardType="numeric"
-              value={profReference2?.mobileNo.toString()}
+              value={profReference2?.mobileNo?.toString()}
               onChangeText={(val) => setProfreference2(prevState => ({ ...prevState,mobileNo: val}))}
               classView='flex-1'
             />
-
-            
            </View>  
         </View>
       </ScrollView>
-      <BottomButton
-        // onPress={() => { }}
+      {/* <BottomButton
         onPress={formik.handleSubmit as (values: any) => any}
         text='Save'
         disabled={role === "agency-clinician" && userStatus !== "Active"}
+      /> */}
+      <BottomButton
+        onPress={formik.handleSubmit as (values: any) => any}
+        text='Save'
       />
       <DeleteModal
         modalVisible={deleteModal}

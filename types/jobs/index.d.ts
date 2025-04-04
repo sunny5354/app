@@ -101,6 +101,7 @@ export interface ClinicianBadgeProps {
   agencyPhone: string;
   staffMemberSince:string;
   agencyLocation:string;
+  agencyZipCode: string;
 }
 
 

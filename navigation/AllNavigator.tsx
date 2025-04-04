@@ -26,7 +26,7 @@ import TaxDocs from "../screens/Profile/TaxDocs";
 import JobInfoScreen from "../screens/Jobs/InfoScreen";
 import AppliedJobs from "../screens/AppliedJobs";
 import OnCall from "../screens/OnCall";
-import Earnings from "../screens/Earnings";
+import Financial from "../screens/Financial";
 import HelpSupport from "../screens/HelpSupport";
 import AssignedJobs from "../screens/AssignedJobs";
 import PointOfCare from "../screens/PointOfCare";
@@ -37,6 +37,7 @@ import MessageScreen from "../screens/Messages/components/MessageScreen";
 import JobTypeInfoScreen from "../screens/Schedule/InfoScreen";
 import PastJobs from "../screens/PastJobs";
 import PastJobInfoScreen from "../screens/PastJobs/InfoScreen";
+import About from "../screens/About";
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -68,7 +69,8 @@ const AllNavigator = () => {
             <Stack.Screen name="AssignedJobInfoScreen" component={AssignedJobInfoScreen} />
             <Stack.Screen name="PastJobInfoScreen" component={PastJobInfoScreen} />
             <Stack.Screen name="OnCall" component={OnCall} />
-            <Stack.Screen name="Earnings" component={Earnings} />
+            <Stack.Screen name="Financial" component={Financial} />
+            <Stack.Screen name="About" component={About} />
             <Stack.Screen name="HelpSupport" component={HelpSupport} />
             <Stack.Screen name="AppliedJobs" component={AppliedJobs} />
             <Stack.Screen name="MessageScreen" component={MessageScreen} />
@@ -214,7 +216,7 @@ const AllNavigator = () => {
                     headerTitle: "",
                     headerBackVisible: false,
                     headerLeft: () => {
-                        return <Typography class="text-white font-PoppinsSemiBold text-lg">Credentials/Licensing</Typography>
+                        return <Typography class="text-white font-PoppinsSemiBold text-lg">Licensing Credential</Typography>
                     },
                     headerStyle: {
                         backgroundColor: colors.primaryGreen

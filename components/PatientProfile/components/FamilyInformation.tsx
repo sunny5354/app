@@ -19,8 +19,6 @@ const InfoTypography = ({ label, value }: { label: string, value: string }) => {
   )
 }
 
-
-
 const FamilyInformation = ({ data }: { data: PatientDetailProps }) => {
   return (
     <View style={backgroundShadow.backgroundShadow}>
@@ -28,7 +26,7 @@ const FamilyInformation = ({ data }: { data: PatientDetailProps }) => {
       <View className='h-[1px] bg-border' />
       <View style={{ gap: 8 }}>
         <InfoTypography label='Next to Kin.' value={data.family.name} />
-        <InfoTypography label='Age/Gender' value={data.family.age} />
+        <InfoTypography label='Age/Gender' value={data.family.gender} />
         <InfoTypography label='Relationship' value={data.family.relationship} />
         <InfoTypography label='Mobile No.' value={data.family.attendantMobNo} />
       </View>

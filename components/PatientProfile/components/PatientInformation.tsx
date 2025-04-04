@@ -30,8 +30,8 @@ const PatientInformation = ({ data }: { data: PatientDetailProps }) => {
         <InfoTypography label='Start of Care' value={dateShowFormat(data.careStartDate)} />
         <InfoTypography label='Date of Birth' value={dateShowFormat(data.dob)} />
         <InfoTypography label='Location' value={data.location} />
-        <InfoTypography label='Height' value={data.height.toString() + " Cm"} />
-        <InfoTypography label='Weight' value={data.weight.toString() + " Kg"} />
+        <InfoTypography label='Height' value={data.height.toString() + " Ft-In"} />
+        <InfoTypography label='Weight' value={data.weight.toString() + " Lbs"} />
         <InfoTypography label='Mobile No.' value={data.phone} />
       </View>
     </View>

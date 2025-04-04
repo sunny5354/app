@@ -12,6 +12,7 @@ import BackHeader from '../../components/Headers/BackHeader'
 import Typography from '../../components/Typography/Typography'
 
 const AppliedJobs = ({ navigation }: ScreenProps) => {
+
   const [filterModal, setFilterModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [publishedJobs, setPublishedJobs] = useState<JobDataProps[] | null>(null);
@@ -49,19 +50,19 @@ const AppliedJobs = ({ navigation }: ScreenProps) => {
       />
       <ScrollView>
         <View className='flex-1 p-5' style={{ gap: 20 }}>
-          {
-            publishedJobs && publishedJobs.length > 0 ? (publishedJobs?.map((_, i) => (
-              <JobCard
-                data={_}
-                key={i}
-                handlePress={() => { navigation.navigate("AppliedJobInfoScreen", { id: _._id }) }}
-                applied
-              />
-            ))) :
-              <View>
-                <Typography>No Jobs applied by you</Typography>
-              </View>
-          }
+        {
+          publishedJobs && publishedJobs.length > 0 ? (publishedJobs?.map((_, i) => (
+          <JobCard
+            data={_}
+            key={i}
+            handlePress={() => { navigation.navigate("AppliedJobInfoScreen", { id: _._id }) }}
+            applied
+          />
+         ))) :
+         <View>
+          <Typography>No Jobs applied by you</Typography>
+         </View>
+        }
         </View>
       </ScrollView>
     </View>

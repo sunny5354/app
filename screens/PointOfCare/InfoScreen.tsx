@@ -16,10 +16,12 @@ import FakeMap from '../../components/FakeMap'
 import SingleBottomButton from '../../components/BottomButton/SingleBottomButton'
 import AddQaForm from './components/AddQaform'
 import Button from '../../components/Button'
+import { useIsFocused } from '@react-navigation/native'
 
 const JobTypeInfoScreen = ({ navigation, route }: ScreenProps) => {
 
   const { id } = route.params;
+  const isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<JobDataProps | null>(null);
   const [logMileageModal, setLogMileageModal] = useState(false);
@@ -68,7 +70,7 @@ const JobTypeInfoScreen = ({ navigation, route }: ScreenProps) => {
   useEffect(() => {
     fetchSingleJobDetail();
     fetchLogMileage();
-  }, [])
+  }, [isFocused])
 
   if (loading) {
     return (
@@ -79,8 +81,6 @@ const JobTypeInfoScreen = ({ navigation, route }: ScreenProps) => {
   if (!data) {
     return null;
   }
-
-  console.log("Data",data);
 
   return (
     <View className='flex-1 bg-slate-100'>
@@ -100,26 +100,48 @@ const JobTypeInfoScreen = ({ navigation, route }: ScreenProps) => {
           <FakeMap location={data.location}/>
         </View>
       </ScrollView>
-      {/* {<FilterButtons
-        tilte1='Log Mileage'
-        title2='QA Document'
-        handlePress1={() => {
-          setLogMileageModal(true);
-        }}
-        handlePress2={() => { }}
-      />} */}
       {
-        data?.qaStatus == "QA Submitted" ?
+        data?.qaStatus == "QA Submitted" &&
         <Pressable className='bg-[#1B2850] px-6 py-2 flex justify-center items-center rounded-lg'>
           <Typography class='text-white font-PoppinsSemiBold'>QA Submitted</Typography>
-        </Pressable>
-        :
+        </Pressable>      
+      }
+
+      { 
+        data?.qaStatus == "QA Disapproved" &&
+        <Pressable className='bg-[#1B2850] px-6 py-2 flex justify-center items-center rounded-lg'>
+          <SingleBottomButton 
+            handlePress1={()=>{
+              setUploadQaModal(true);
+            }}
+            tilte='Re-submit QA Document'
+          />  
+        </Pressable>      
+      }
+
+      {
+        data?.qaStatus == "QA Approved" &&
+        <Pressable className='bg-[#25ba74] px-6 py-2 flex justify-center items-center rounded-lg'>
+          <Typography class='text-white font-PoppinsSemiBold'>QA Approved</Typography>
+        </Pressable>      
+      }
+
+
+      {
+        data?.qaStatus == "Paid" &&
+        <Pressable className='bg-[#25ba74] px-6 py-2 flex justify-center items-center rounded-lg'>
+          <Typography class='text-white font-PoppinsSemiBold'>Paid</Typography>
+        </Pressable>      
+      }
+
+      {
+        data?.qaStatus == "QA Inprogress" &&
         <SingleBottomButton 
           handlePress1={()=>{
             setUploadQaModal(true);
           }}
           tilte='QA Document'
-        />
+        />    
       }
       
       <AddQaForm

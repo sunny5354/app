@@ -180,7 +180,6 @@ const SkillSet = () => {
             <View className='flex-1'>
               <Button
                 onPress={formik.handleSubmit as (values: any) => any}
-                disabled={role === "agency-clinician" && userStatus !== "Active"}
                 showLoader={isBtnLoading}
               >Add Skill</Button>
             </View>

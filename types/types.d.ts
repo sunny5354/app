@@ -92,6 +92,16 @@ export type selectedUploadValueProp = {
     value: string;
 }
 
+export type notificationProp = {
+    id: string;
+    title: string;
+    activeStatus: string;
+    description: string;
+    time: string;
+    success: boolean;
+    icon: string;
+}
+
 export type DocumentPickerResult = {
     uri: string;
     type: string;

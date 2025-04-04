@@ -46,6 +46,7 @@ const ScheduleJobs = ({ navigation }: ScreenNavigationProp) => {
     setLoading(true);
     try {
       const res = await getJobsByType(jobType);
+      console.log("ganesh",res);
       setJobDetail(res.jobs);
     } catch (error: any) {
       errorToast(error.response.data.message);

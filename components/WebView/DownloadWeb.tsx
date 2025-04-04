@@ -9,13 +9,14 @@ export default function DownloadWeb({ navigation, route }: ScreenProps) {
     const [progress, setProgress] = useState(0);
     const webview = useRef(null);
 
-
     useEffect(() => {
         if (progress === 1) {
             navigation.goBack();
            
         }
     }, [progress])
+
+    console.log("progress", progress);
 
     return (
         <View style={styles.container}>

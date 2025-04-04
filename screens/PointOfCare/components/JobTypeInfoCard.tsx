@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 const JobTypeInfoCard = ({ data }: { data: JobDataProps }) => {
+  
   const [patientProfieModal, setPatientProfileModal] = useState(false);
   const [documentProfieModal, setDocumentProfileModal] = useState(false);
   const [clinicanBadgeModal, setClinicianBadgeModal] = useState(false);

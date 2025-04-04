@@ -53,7 +53,8 @@ const PatientProfile: React.FC<ModalChildrenProps & { id: string }> = ({
           Platform.OS === 'ios' ? "mt-12 mb-3" : "mt-1"
         )}
         style={{
-          backgroundColor: 'rgba(0,0,0,0.2)'
+          backgroundColor: 'rgba(0,0,0,0.2)',
+          height: 300, 
         }}
       >
         <View className="flex-1 bg-background w-full">

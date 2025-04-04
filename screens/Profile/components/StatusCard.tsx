@@ -30,7 +30,7 @@ const StatusCard = ({ profile }: { profile: ProfileCardProps }) => {
       style={{ gap: 10, justifyContent: 'space-between' }}
     >
       <View className='bg-white px-2 py-3 h-20 flex-1 rounded-lg justify-between'>
-        <Typography variant='xsm'>Member Since</Typography>
+        <Typography variant='xsm'>Joined</Typography>
         <View className='flex-row items-center'>
           <Image
             source={calendar}

@@ -12,7 +12,7 @@ const JobDescriptionCard = ({ data }: { data: JobDataProps }) => {
     try {
       const result = await Share.share({
         message:
-          `Job Type : ${data.jobType}\nTask Type : ${data.taskType}\nDescription : ${data.jobDescription}\nWebsite: https://actastaffing.starpankaj.com`,
+          `Job Type : ${data.jobType}\nTask Type : ${data.taskType}\nDescription : ${data.jobDescription}\nWebsite: https://actastaffing.com`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -42,12 +42,21 @@ const JobDescriptionCard = ({ data }: { data: JobDataProps }) => {
       <Typography class='text-primaryGreen'>Job Description : </Typography>
       <Typography variant='sm'>{data.jobDescription}</Typography>
       <Divider />
-      <View className='justify-center items-center' style={{ gap: 10 }}>
-        <View className='flex-row' style={{ gap: 20 }}>
-          <Typography variant='sm'>Pay Rate : ${data.payRate}</Typography>
-          <View className='border-r border-primaryGreen' />
+      <View className='-mt-5'>
+        <Typography class='text-primaryGreen'>Payment & Distance : </Typography>
+        <View className='flex-column' style={{ gap: 2 }}>
+          <View className='flex-row' style={{ gap: 10 }}>
+            {/* @ts-ignore */}
+            <Typography variant='sm'>Payt. Type : {data?.paymentType} </Typography>
+            <View className='border-r border-primaryGreen' />
+            <Typography variant='sm'>Pay Rate : ${data?.payRate}</Typography>
+          </View>
+          
           <Typography variant='sm'>Distance : {data.away}</Typography>
         </View>
+      </View>
+
+      <View className='justify-center items-center mt-6 bottom-4' style={{ gap: 12 }}>
         <Button onPress={onShare} className='bg-[#5280F7]'>
           <View className="flex-row items-center" style={{ gap: 10 }}>
             <Feather name="share-2" size={16} color="white" />

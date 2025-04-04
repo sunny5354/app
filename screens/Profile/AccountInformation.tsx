@@ -196,7 +196,7 @@ const AccountInformation = ({ navigation }: { navigation: ScreenNavigationProp }
         formik.setFieldValue("lastName", result.user.fullName.split(" ")[1]);
         formik.setFieldValue("email", result.user.email);
         formik.setFieldValue("phone", result.user.phone);
-        formik.setFieldValue("city", result.user.location.city);
+        formik.setFieldValue("city", result.user?.location?.city);
         setSelectedCountry({
           label: result.user.location.country,
           value: result.user.location.country
@@ -211,7 +211,7 @@ const AccountInformation = ({ navigation }: { navigation: ScreenNavigationProp }
         })
       }
     } catch (error: any) {
-      console.log(error.response.data.message);
+      console.log("error",error.response.data.message);
     }
   }
 
@@ -353,7 +353,6 @@ const AccountInformation = ({ navigation }: { navigation: ScreenNavigationProp }
       <BottomButton
         onPress={formik.handleSubmit as (values: any) => any}
         text='Save'
-        disabled={(role === "agency-clinician") && userStatus !== "Active"}
       />
     </View>
   )

@@ -2,7 +2,6 @@ import axiosInstance from "./axiosInstance"
 import axiosInstanceAuth from "./axiosInstanceAuth";
 
 
-
 export const getProfile = async () => {
   const result = await axiosInstance.get("/clinician/profile");
   return result.data;

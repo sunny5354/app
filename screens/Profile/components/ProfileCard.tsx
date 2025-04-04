@@ -1,8 +1,6 @@
 import { View, Image, Pressable } from 'react-native'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-
-
 import ProfileTop from "../../../assets/Profile/ProfileTop.png"
 import Typography from '../../../components/Typography/Typography'
 import location from "../../../assets/icons/MapPin.png"
@@ -12,8 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 import { ScreenNavigationProp } from '../../../types/navigation';
 import ImageModal from '../../../components/Modals/ImageModal';
 import { imagePdfFileTypeProps } from '../../../types/types';
-
-
 
 type ProfileCardProps = {
   "avatar": imagePdfFileTypeProps,
@@ -56,7 +52,7 @@ const ProfileCard = ({ profile, setRefresh }: { profile: ProfileCardProps, setRe
         className='w-full h-40'
       />
       <View className='absolute top-0 bottom-0 right-0 left-0 flex-1 p-4 mt-4'>
-        <View className='flex-1' style={{ gap: 10 }}>
+        <View className='flex-1' style={{ gap: 4 }}>
           <View className='flex-row'>
             <View className='flex-1'>
               <MaterialIcons onPress={() => { navigation.goBack() }} name="arrow-back-ios" size={20} color="white" />

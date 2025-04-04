@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StatusBar, Switch, View, useWindowDimensions } from 'react-native';
+import { Alert, Image, Pressable, ScrollView, StatusBar, Switch, View, useWindowDimensions } from 'react-native';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
@@ -17,8 +17,8 @@ import { gender } from '../../data/data';
 import DateTimePickers from '../../components/DateTimePicker';
 import { addBasicInfoUser } from '../../http/profile/basic';
 import { AuthContext } from '../../store/authContext';
-import { errorToast, infoToast, successToast } from '../../lib/toast';
-import { getBasicProfile } from '../../http/user';
+import { errorCustomToast, errorToast, infoToast, successToast } from '../../lib/toast';
+import { getBasicProfile,getProfile } from '../../http/user';
 import Loading from '../Loading';
 import ImageModal from '../../components/Modals/ImageModal';
 import { getAgencyNames, getCounty, getDropDown } from '../../http/util/dropdown';
@@ -113,7 +113,6 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
     phone: string;
     pincode: string;
     city: string;
-   
   }
 
   const validationSchema = yup.object({
@@ -122,11 +121,31 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
     middleName: yup.string().optional(),
     street: yup.string().required("Street is required"),
     houseNo: yup.string().required("House No. is required"),
-    phone: yup.string().required("Mobile Number is required").min(10, "Please enter a valid phone number").max(10),
+   // phone: yup.string().required("Mobile Number is required").min(10, "Please enter a valid phone number").max(10),
     pincode: yup.string().required("Required").min(5, "Min 6").max(5),
     city: yup.string().required("Required"),
    
   })
+
+  const [phone,setPhone] = useState('');
+
+  const HandleMobileFormat = (text) => {
+    let formatedNo = formatMobileNumber(text);
+    setPhone(formatedNo);
+  };
+  
+  const formatMobileNumber = (text) => {
+    var cleaned = ("" + text).replace(/\D/g, "");
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      var intlCode = match[1] ? "+1 " : "",
+        number = [intlCode, "(", match[2], ") ", match[3], "-", match[4]].join(
+          ""
+        );
+      return number;
+    }
+    return text;
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -176,11 +195,17 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
         return;
       }
 
+      if(phone == "") {
+        infoToast("Mobile number is required");
+        return;
+      }
+
       // console.log(values);
       setIsBtnLoading(true);
+      
       const basicInfoObject = {
         "fullName": (values.firstName + " " + values.lastName),
-        "phone": values.phone,
+        "phone": phone.replace("(","").replace(")","").replace(" ","").replace("-",""),
         "dob": date,
         "gender": selectGender.value,
         "address": {
@@ -198,20 +223,25 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
         "usWorkAuthorization": isAuthWork,
         "agency": selectedAgencyName.value
       }
-      console.log("ye wala=>", basicInfoObject.language);
-      //@ts-ignore
-      if (!isEnrolled) delete basicInfoObject.agency;
-      try {
-        const result = await addBasicInfoUser(basicInfoObject);
-        authCtx.validateTempToUser()
-        successToast(result.message);
-      } catch (error: any) {
-        console.log("Basic profile Update error =>", error.response.data.message);
-        errorToast(error.response.data.message ?? "Error Occured");
+
+      if(!isAuthWork) {
+        errorCustomToast("You’re not authorized to work in the US and couldn’t proceed");
+      } else {
+        //@ts-ignore
+        if (!isEnrolled) delete basicInfoObject.agency;
+        try {
+          const result = await addBasicInfoUser(basicInfoObject);
+          authCtx.validateTempToUser()
+          successToast(result.message);
+        } catch (error: any) {
+          console.log("Basic profile Update error =>", error.response.data.message);
+          errorToast(error.response.data.message ?? "Error Occured");
+        }
       }
       setIsBtnLoading(false);
     },
   })
+
   const handleDateChange = (selectedDate: any) => {
     const currentDate = new Date(selectedDate.nativeEvent.timestamp);
     setDate(currentDate);
@@ -224,9 +254,10 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
    //   return;
   //  }   
     try {
-      const res = await sendAccountVerifyPhoneCode(formik.values.phone);
+      const mbphone = phone.replace("(","").replace(")","").replace(" ","").replace("-","");
+      const res = await sendAccountVerifyPhoneCode(mbphone);
       console.log("account phone send otp =>", res);
-      navigation.navigate("OTP", { isAuthPhone: true, phoneNumber: formik.values.phone })
+      navigation.navigate("OTP", { isAuthPhone: true, phoneNumber: mbphone })
       successToast(res.message)
     } catch (error: any) {
       console.log(error.response.data.message);
@@ -407,12 +438,14 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
     try {
       const result = await getBasicProfile();
       setUser(result);
+      console.log(result);
       // console.log("fetchProfile=>", result);
       if (result) {
         const firstName = result.fullName.split(" ")[0];
         const lastName = result.fullName.split(" ")[1];
         formik.setFieldValue("firstName", firstName);
         formik.setFieldValue("lastName", lastName);
+        setPhone(formatMobileNumber(result?.phone))
       }
     } catch (error: any) {
       console.log("fetch profile error=>", error.response.data.message);
@@ -577,21 +610,18 @@ export default function RegisterProfile({ navigation }: { navigation: ScreenNavi
                   !!formik.errors.phone
                 }
               /> */}
+              
               <Input
                 classView='flex-1'
-                placeholder='00000000000'
+                placeholder="(xxx) xxx-xxxx"
                 className='text-lg'
                 keyboardType='number-pad'
-                maxLength={10}
-                value={formik.values.phone}
-                onChangeText={formik.handleChange("phone")}
-                onBlur={formik.handleBlur("phone")}
-                isError={
-                  !!formik.touched.phone &&
-                  !!formik.errors.phone
-                }
-                error={formik.errors.phone}
-                onSubmitEditing={formik.submitForm as () => void}
+                maxLength={14}
+                value={phone}
+                onChangeText={text => {
+                  HandleMobileFormat(text);
+               }}
+                readOnly={user.isPhoneVerified ? true : false}
               />
             </View>
             <View className='flex-row items-center' style={{ gap: 10 }}>

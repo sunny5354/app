@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Acta",
-    "slug": "medicent",
+    "name": "Acta Clinician",
+    "slug": "acta",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/appIcon.png",
+    "icon": "./assets/appIcon1.png",
     "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
@@ -15,7 +15,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sunny5354.acta",
+      "buildNumber": "4"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +30,8 @@
         "googleMaps": {
           "apiKey": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
         }
-      }
+      },
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/appIcon.png"
@@ -39,14 +42,24 @@
     "owner": "sunny5354",
     "extra": {
       "eas": {
-        "projectId": "332365e4-a143-4dd2-a37a-9c20c5e58760"
+        "projectId": "5d5759bf-c530-40f9-8ad1-1ca4d7ff1310"
       }
     },
     "updates": {
       "url": "https://u.expo.dev/332365e4-a143-4dd2-a37a-9c20c5e58760"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true,
+            "extraProguardRules": "-keep public class com.horcrux.svg.** {*;}",
+            "allowBackup": false
+          }
+        }
+      ]
     ]
   }
 }

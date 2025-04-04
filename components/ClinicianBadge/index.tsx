@@ -27,7 +27,7 @@ const ClinicianBadge: React.FC<ModalChildrenProps & { id: string }> = ({
     const fetchPatientDetails = async () => {
       try {
         const res = await getClinicianBadgeDetails(id);
-        // console.log(res);
+        console.log("Badge",res.jobBadge);
         setBadgeDetails(res.jobBadge)
       } catch (error: any) {
         console.log(error.response.data);
@@ -106,8 +106,9 @@ const ClinicianBadge: React.FC<ModalChildrenProps & { id: string }> = ({
                 </View>
                 <View className="h-[1px] bg-primaryBlue" />
                 <View className="justify-center items-center mt-2" style={{ gap: 2 }}>
-                  <Typography class="font-PoppinsMedium">{badgeDetails?.agencyName}</Typography>
-                  <Typography variant="xsm">{badgeDetails?.agencyLocation}</Typography>
+                  <Typography class="font-PoppinsMedium">{badgeDetails?.agencyName}</Typography> 
+                  {/* @ts-ignore */}
+                  <Typography variant="xsm" class="text-center">{badgeDetails?.agencyAddress}</Typography> 
                   <View className="flex-row items-center" style={{ gap: 10 }}>
                     {/* <Ionicons name="call-outline" size={20} color="black" /> */}
                     <Image

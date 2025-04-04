@@ -54,6 +54,7 @@ const DocPdfViewModal: React.FC<PdfViewProps> = ({
   const save = async (uri: string) => {
     shareAsync(uri);
     handleModalVisible();
+    
   };
 // console.log(pdfObject); 
   return (

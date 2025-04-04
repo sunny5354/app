@@ -11,6 +11,7 @@ import earnings from "../assets/menu/CreditCard.png"
 import helpAndSupport from "../assets/menu/Megaphone.png"
 import security from "../assets/menu/Lock.png"
 import logout from "../assets/menu/SignOut.png"
+import education from "../assets/menu/ClipboardText.png"
 
 export const _four_items = [
     { id: 1, ref: 'ref1' },
@@ -193,15 +194,18 @@ export const ProfilePageData = [
 
 export const MenuData = [
     { id: 1, title: "Profile", img: user, to: "Profile" },
-    { id: 33, title: "Job Preference", img: workPrefrence, to: "WorkPrefrence" },
-    { id: 37, title: "Schdeduled Jobs", img: pastJobs, to: "Schedule" },
-    { id: 2, title: "Assigned Jobs", img: assignedJobs, to: "AssignedJobs" },
     { id: 30, title: "Applied Jobs", img: appliedJobs, to: "AppliedJobs" },
-    { id: 31, title: "QA Documentation", img: pointofCare, to: "PointOfCare" },
-    { id: 6, title: "On Call", img: security, to: "OnCall" },
+    { id: 2, title: "Assigned Jobs", img: assignedJobs, to: "AssignedJobs" },
+    { id: 37, title: "Schdeduled Jobs", img: pastJobs, to: "Schedule" },
+    { id: 31, title: "Jobs Under QA", img: pointofCare, to: "PointOfCare" },
     { id: 32, title: "Past Jobs", img: pastJobs, to: "PastJobs" },
-    { id: 4, title: "Earnings", img: earnings, to: "Earnings" },
-    { id: 5, title: "Help & Support", img: helpAndSupport, to: "HelpSupport" },
+    { id: 6, title: "On Call", img: security, to: "OnCall" },
+    { id: 4, title: "Financial", img: earnings, to: "Financial" },
+    { id: 33, title: "Educational Attainments", img: workPrefrence, to: "Education" },
+    { id: 34, title: "Licensing Credentials", img: education, to: "Credential" }, 
+    // { id: 38, title: "Background Check", img: education, to: "BackgroundCheck" },
+    { id: 39, title: "About", img: education, to: "About" },
+    { id: 5, title: "Help & Support", img: helpAndSupport, to: "HelpSupport" }, 
     { id: 7, title: "Log Out", img: logout, to: "Profile" },
 ]
 

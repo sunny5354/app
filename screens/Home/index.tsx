@@ -4,6 +4,7 @@ import { useIsFocused, useNavigation } from '@react-navigation/native';
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 
+import moment from 'moment';
 
 import HomeHeader from './components/HomeHeader';
 import Typography from '../../components/Typography/Typography';
@@ -24,20 +25,31 @@ import LockPopup from '../../components/LockPopup';
 import JobsNearby from './components/JobsNearby';
 import { updatePushToken } from '../../http/user';
 
-
 export default function App() {
 
   const isFocused = useIsFocused();
   const [homeData, setHomeData] = useState<HomeDataProps | null>(null);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation<ScreenNavigationProp>();
-
+  const [expires,setExpires] = useState<boolean>(false);
 
   const getHomeServices = async () => {
     setLoading(true);
     try {
       const res = await fetchHomeServices();
-      // console.log("here",res);
+      console.log("here",res.home);
+      const dateLimit = moment(res.home.avatar.expires, 'YYYY-MM-DDTHH:mm:ss.SSSZ');
+      console.log("dateLimit", dateLimit);
+      const now = moment();
+      console.log("now", now);
+      if (dateLimit.isValid() && now.isBefore(dateLimit)) {
+        console.log("Live");
+        setExpires(false);
+      } else {
+        console.log("expire",now);
+        setExpires(true);
+      }
+
       setHomeData(res.home);
     } catch (error: any) {
       errorToast(error.response.data.message ?? "Something went wrong");
@@ -186,12 +198,13 @@ export default function App() {
 
   if (loading) return <Loading />
 
+
   return (
     <View className='flex-1 bg-background'>
       {homeData?.avatar && <HomeHeader avatar={homeData?.avatar} />}
       {(userStatus && userStatus === "Active") ? <ScrollView>
         <View className='flex-1 px-2 py-5' style={{ gap: 10 }}>
-          {homeData?.update !== 0 && <Pressable onPress={() => {
+          {homeData?.update !== 0 && !expires && <Pressable onPress={() => {
             navigation.navigate("AssignedJobs")
           }} className='bg-primaryPurple py-4 justify-center -mt-2 items-center rounded-lg'>
             <View className='justify-center items-center' style={{ gap: 2 }}>

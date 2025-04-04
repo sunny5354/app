@@ -47,12 +47,6 @@ const AddQaForm: React.FC<LogMileageModalProps> = ({
 }) => {
 
   const navigation = useNavigation<ScreenNavigationProp>();
-  const [signature, setSignature] = useState<imagePdfFileTypeProps | null>(null);
-  const [timeIn, setTimeIn] = useState(new Date());
-  const [inTime, setInTime] = useState<string>(new Date().toTimeString());
-  const [timeOut, setTimeOut] = useState(new Date());
-  const [outTime, setOutTime] = useState<string>(new Date().toTimeString());
-  const [clientSignatureModal, setClientSignatureModal] = useState(false);
   const [uploadedDoc, setUploadedDoc] = useState<null | UploadedDataProps>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [selectedAgencyForm, setSelectedAgencyForm] = useState<selectedUploadValueProp>({
@@ -62,75 +56,6 @@ const AddQaForm: React.FC<LogMileageModalProps> = ({
     label: "Nothing to show", value: "0"
   }])
 
-  const handleConfirm = (str: string, event: "In" | "Out") => {
-    if (event === "In") {
-      setInTime(str);
-    }
-    if (event === "Out") {
-      setOutTime(str);
-    }
-  };
-
-  const handleDateChange = (selectedDate: any, type: "start" | "end") => {
-    const date = new Date(selectedDate.nativeEvent.timestamp);
-    if (type === "start") {
-      setTimeIn(date);
-    }
-    if (type === 'end') {
-      setTimeOut(date)
-    }
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      associateMileage: "",
-      notes: ""
-    },
-    validationSchema: yup.object({
-      associateMileage: yup.string().required(),
-      notes: yup.string().required()
-    }),
-    onSubmit: async (values) => {
-      if (!signature) {
-        alert("Please collect signature");
-        return;
-      }
-      const obj: LogMileageProps = {
-        inDate: timeIn.toString(),
-        outDate: timeOut.toString(),
-        mileage: values.associateMileage,
-        notes: values.notes,
-        patientSignature: signature?._id,
-        inTime: inTime,
-        outTime: outTime
-      }
-      handleSubmit(obj);
-      handleModalVisible();
-    }
-  })
-
-
-  // useEffect(() => {
-  //   if (data) {
-  //     formik.setValues({
-  //       associateMileage: data.mileage,
-  //       notes: data.notes
-  //     })
-  //     setSignature(data.patientSignature);
-  //     setTimeIn(new Date(data.inDate));
-  //     setTimeOut(new Date(data.outDate));
-  //     setInTime(data.inTime);
-  //     setOutTime(data.outTime);
-  //   }
-  //   else {
-  //     setSignature(null);
-  //     setTimeIn(new Date());
-  //     setTimeOut(new Date());
-  //     setInTime(new Date().toTimeString().slice(0,5))
-  //     setOutTime(new Date().toTimeString().slice(0,5))
-  //     formik.resetForm();
-  //   }
-  // }, [modalVisible])
 
   const handleUpload = async (resultFile:any) => {
     console.log("file", resultFile);
@@ -163,6 +88,7 @@ const AddQaForm: React.FC<LogMileageModalProps> = ({
   const HandleSavedocfileData = async () => {
     try {
        // @ts-ignore
+      console.log(otherProps?.jobId,selectedAgencyForm?._id,qaDoc);
       const result = await saveQADocpdfData(otherProps?.jobId,selectedAgencyForm?._id,qaDoc);
       console.log("result12", result);
       //Alert.alert("Success","QA Document has been submitted Successfully");
@@ -171,7 +97,7 @@ const AddQaForm: React.FC<LogMileageModalProps> = ({
       //handleModalVisible();
     } catch (error) {
       // @ts-ignore
-      console.log("error uploading submittinggg", error.response);
+      console.log("error uploading", error);
       // @ts-ignore
       Alert.alert('Error', error.response.data.message);
     }
@@ -217,20 +143,13 @@ const AddQaForm: React.FC<LogMileageModalProps> = ({
         console.log("Result",data);
         setAgencyData(res.documents);
       } catch (error: any) {
-        console.log("error",error.response.data);
+        console.log("errorll",error.response.data);
       }
     }
     fetchDocumentDetails(); 
   }, [])
 
   if (!agencyData) return null;
-
-  // if (isUploading) {
-  //   return (
-  //     <Loading />
-  //   )
-  // }
-
 
   return (
     <Modal
@@ -262,9 +181,9 @@ const AddQaForm: React.FC<LogMileageModalProps> = ({
             <Text style={styles.title}>Add QA Document</Text>
             <View style={styles.innercontainer}>
                 
-                <View style={styles.dropdownContainer}>
+                {/* <View> */}
                   <CustomDropdown label='Select Agency Form*' selectedValue={selectedAgencyForm} setSelectedValue={setSelectedAgencyForm} data={agencyData} />
-                </View>
+                {/* </View> */}
 
                 {/* Upload Box */}
                 <View style={styles.uploadBox}>
@@ -276,8 +195,6 @@ const AddQaForm: React.FC<LogMileageModalProps> = ({
                   <TouchableOpacity style={styles.uploadButton} onPress={pickDocument}>
                     <Text style={styles.uploadButtonText}>Upload</Text>
                   </TouchableOpacity>
-                  {/* <Button onPress={pickDocument}>Upload</Button> */}
-                  {/* { file && <Text style={{ marginVertical: 10 }}>File is uploaded</Text>} */}
                 </View> 
             </View>
               
@@ -325,6 +242,9 @@ const styles = StyleSheet.create({
   innercontainer: {
     borderColor: 'silver',
     borderWidth: 1,
+    flex:1,
+    justifyContent: 'space-between',
+    gap: 12,
     paddingTop: 15,
     paddingBottom: 5,
     paddingRight: 10,
@@ -351,9 +271,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#e0e0e0',
-    paddingVertical: 20,
-    alignItems: 'center',
-    marginBottom: 20,
+    paddingVertical: 40,
+    alignItems: 'center'
   },
   uploadCircle: {
     width: 160,
@@ -376,7 +295,7 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     position: 'relative',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   dropdown: {
     borderWidth: 1,

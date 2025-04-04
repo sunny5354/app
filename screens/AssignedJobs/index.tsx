@@ -19,7 +19,7 @@ const AssignedJobs = ({ navigation }: ScreenProps) => {
     setLoading(true);
     try {
       const res = await getAssignedJobs();
-      // console.log(res);
+      console.log("res",res);
       setPublishedJobs(res.jobs);
     } catch (error: any) {
       errorToast(error.response.data.message);

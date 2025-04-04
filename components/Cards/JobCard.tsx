@@ -1,16 +1,16 @@
 import { Pressable, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Typography from '../Typography/Typography'
 import Divider from '../Divider'
 import { Ionicons } from '@expo/vector-icons';
 import Button from '../Button';
-import { JobDataProps } from '../../types/jobs';
+import { JobDataProps, LogMileageProps } from '../../types/jobs';
 import { dateShowFormat } from '../../lib/dateFormatter';
-import { acceptJob, declineJob } from '../../http/jobs/jobs';
+import { acceptJob, declineJob, uploadLogMileageDetails } from '../../http/jobs/jobs';
 import { errorToast, successToast } from '../../lib/toast';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenNavigationProp } from '../../types/navigation';
-
+import AddQaForm from '../../screens/PointOfCare/components/AddQaform';
 
 interface JobCardProps {
   data: JobDataProps,
@@ -27,6 +27,8 @@ interface JobCardProps {
 const JobCard: React.FC<JobCardProps> = ({ data, handlePress, isPointOfCare, applied, assigned, scheduled, overdue, completed, pastJobs }) => {
 
   const navigation = useNavigation<ScreenNavigationProp>();
+  const [uploadqaModal, setUploadQaModal] = useState(false);
+
   const handleAcceptJob = async () => {
     try {
       // console.log('Accept Job')
@@ -46,6 +48,23 @@ const JobCard: React.FC<JobCardProps> = ({ data, handlePress, isPointOfCare, app
     } catch (error: any) {
       console.log(error.response.data);
       errorToast(error.response.data.message);
+    }
+  }
+
+  const handleSubmit = async (obj: LogMileageProps) => {
+    if (!obj) {
+      return;
+    }
+    try {
+      const res = await uploadLogMileageDetails(id, obj);
+      console.log(res);
+      if (res.success) {
+        successToast(res.message);
+        navigation.navigate("PointOfCare");
+      }
+    } catch (error: any) {
+      errorToast(error.response.data.message);
+      console.log(error.response.data.message);
     }
   }
 
@@ -93,9 +112,30 @@ const JobCard: React.FC<JobCardProps> = ({ data, handlePress, isPointOfCare, app
           )
         }
         {
-          isPointOfCare && (
+          isPointOfCare && data.jobStatus == "QA Approved" && (
+            <View className='bg-green-100 px-6 py-2 flex justify-center items-center rounded-lg'>
+              <Typography variant='xsm' class='text-primaryGreen font-PoppinsSemiBold'>{data.jobStatus}</Typography>
+            </View>
+          )
+        }
+        {
+          isPointOfCare && data.jobStatus == "QA Submitted" && (
+            <View className='bg-orange-100 px-6 py-2 flex justify-center items-center rounded-lg'>
+              <Typography variant='xsm' class='text-orange-600 font-PoppinsSemiBold'>{data.jobStatus}</Typography>
+            </View>
+          )
+        }
+        {
+          isPointOfCare && data.jobStatus == "QA Inprogress" && (
             <View className='bg-red-100 px-6 py-2 flex justify-center items-center rounded-lg'>
-              <Typography variant='xsm' class='text-primaryRed font-PoppinsSemiBold'>{data.jobStatus}</Typography>
+              <Typography variant='xsm' class='text-primaryRed font-PoppinsSemiBold'>{`QA Pending`}</Typography>
+            </View>
+          )
+        }
+        {
+          isPointOfCare && data.jobStatus == "QA Disapproved" && (
+            <View className='bg-blue-100 px-6 py-2 flex justify-center items-center rounded-lg'>
+              <Typography variant='xsm' class='text-primaryBlue font-PoppinsSemiBold'>{data.jobStatus}</Typography>
             </View>
           )
         }
@@ -106,6 +146,21 @@ const JobCard: React.FC<JobCardProps> = ({ data, handlePress, isPointOfCare, app
             </View>
           )
         }
+      </View>
+      <View>
+      {
+        data.jobStatus == "QA Disapproved" && (
+        <View className='flex-column' style={{ gap: 10 }}>
+          <Typography variant='ssxl'>Disapproval Comment </Typography>
+          <Typography variant='ssxl'>N/A</Typography>
+          <Button
+            onPress={() => {
+              setUploadQaModal(true)
+            }}
+            className='bg-primaryRed px-0'>Submit QA Document Again</Button>
+        </View>
+        )
+      }
       </View>
       <View>
         {data.agencyName && <Typography variant='sm'>{data?.agencyName}</Typography>}
@@ -123,16 +178,21 @@ const JobCard: React.FC<JobCardProps> = ({ data, handlePress, isPointOfCare, app
         </View>
       </View>
       <Divider className='my-2' />
-      <View className='flex-row' style={{ gap: 20 }}>
-        <Typography variant='xsm'>Pay Rate : ${data.payRate}</Typography>
-        <View className='border-r border-primaryGreen' />
+      <View className='flex-column' style={{ gap: 2 }}>
+        <View className='flex-row justify-between' style={{ gap: 20 }}>
+          {/* @ts-ignore */}
+          <Typography variant='xsm'>Pay Type : {data?.paymentType}</Typography>
+          <View className='border-r border-primaryGreen' /> 
+          <Typography variant='xsm'>Payt. Rate : ${data.payRate} </Typography>
+        </View>
+        
         <Typography variant='xsm'>Distance : {data.away}</Typography>
       </View>
       {false && <View className='flex-row justify-between' style={{ gap: 20 }}>
         <Button className='bg-primaryRed px-0'>Log Mileage</Button>
         <Button variant='secondary' className='px-0'>QA Document</Button>
       </View>}
-      {assigned && <View className='flex-row justify-between' style={{ gap: 20 }}>
+      {assigned && data?.jobExpireIn != "Expired" && <View className='flex-row justify-between' style={{ gap: 20 }}>
         <Button
           onPress={() => {
             handleAcceptJob()
@@ -144,6 +204,17 @@ const JobCard: React.FC<JobCardProps> = ({ data, handlePress, isPointOfCare, app
           }}
           variant='secondary' className='px-0'>Decline</Button>
       </View>}
+
+      <AddQaForm
+        modalVisible={uploadqaModal}
+        handleModalVisible={() => {
+          setUploadQaModal(false);
+        }}
+        handleSubmit={handleSubmit} // @ts-ignore
+        data={data?.agencyId}
+        jobId={data?._id}
+      />
+
     </Pressable>
   )
 }

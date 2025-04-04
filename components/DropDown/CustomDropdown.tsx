@@ -20,26 +20,18 @@ type MenuDropDownProps = {
 
 
 
-const CustomDropdown: React.FC<MenuDropDownProps> = ({ label, classView, className, selectedValue, setSelectedValue, data, ...otherProps }) => {
-
+const CustomDropdown: React.FC<MenuDropDownProps> = ({ label, selectedValue, setSelectedValue, data }) => {
 
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
-      <View className={cn('my-1 flex-1 relative bg-white border-[1px] placeholder:text-sm font-Poppins placeholder:font-Poppins text-sm border-black rounded-md w-full justify-between items-center py-3 px-3 placeholder:text-black flex-row max-h-12', classView)}>
-        <Typography variant='xsm' class='absolute z-10 left-3 -top-2 bg-white pl-1 pr-3'>{label}</Typography>
+      <View className={`my-1 flex-1 relative bg-white border-[1px] placeholder:text-sm font-Poppins placeholder:font-Poppins text-sm border-black rounded-md w-full justify-between items-center py-3 px-3 placeholder:text-black flex-row h-12`}>
+        <Typography variant='xsm' class='absolute z-10 left-3 -top-2 bg-white pl- pr-3'>{label}</Typography>
         <TouchableOpacity onPress={() => setOpenModal(true)} className='flex-1'>
-          <View className='flex-row justify-between w-full'>
-            <View className='flex-row items-center' style={{ gap: 10 }}>
-              {/* {
-                selectedValue.img && (
-                  <Image
-                    source={selectedValue.img}
-                    alt='Test Image'
-                  />
-                )
-              } */}
+          <View className='flex-row justify-between'>
+            <View className='flex-row items-center'>
+              {/* @ts-ignore */}
               <Typography variant='sm' class='text-black'>{selectedValue.formname}</Typography>
             </View>
             <Entypo name="chevron-down" size={24} color={'gray'} />
@@ -48,7 +40,7 @@ const CustomDropdown: React.FC<MenuDropDownProps> = ({ label, classView, classNa
       </View>
       <AgencyFormModal
         modalVisible={openModal}
-        handleModalVisible={() => setOpenModal(!openModal)}
+        handleModalVisible={() => setOpenModal(!openModal)} // @ts-ignore
         selectedValue={selectedValue._id}
         data={data}
         label={label}

@@ -5,8 +5,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ScreenNavigationProp } from '../../types/navigation'
 import Typography from '../../components/Typography/Typography'
 import { MenuData } from '../../data/data'
-import { AuthContext } from '../../store/authContext';
-import bgMenuImg from "../../assets/menu/bgMenu.png"
+import { AuthContext } from '../../store/authContext';// @ts-ignore
+import bgMenuImg from "../../assets/menu/bgMenu.jpeg" 
 import { fetchHomeServices } from '../../http/home'
 import { imagePdfFileTypeProps } from '../../types/types'
 import { errorToast } from '../../lib/toast'

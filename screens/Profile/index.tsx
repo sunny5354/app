@@ -18,8 +18,8 @@ const Profile = ({ navigation }: { navigation: ScreenNavigationProp }) => {
   const [ProfilePageData, setProfilePageData] = useState([
     { id: 1, title: 'Account Information', complete: true, to: "Account" },
     { id: 2, title: "Personal Information", complete: true, to: "Personal" },
-    { id: 3, title: "Educational Attainment", complete: false, to: "Education" },
-    { id: 4, title: "Credentials/Licensing", complete: false, to: "Credential" },
+    // { id: 3, title: "Educational Attainment", complete: false, to: "Education" },
+    // { id: 4, title: "Credentials/Licensing", complete: false, to: "Credential" },
     { id: 5, title: "Competency/Skillset ", complete: false, to: "SkillSet" },
     // { id: 6, title: "Work Information", complete: false, to: "WorkExperience" },
     { id: 7, title: "Job Preference", complete: false, to: "WorkPrefrence" },
@@ -27,7 +27,7 @@ const Profile = ({ navigation }: { navigation: ScreenNavigationProp }) => {
     // { id: 9, title: "Licenses", complete: false, to: "License" },
    // { id: 10, title: "Covid-19 Screening", complete: false, to: "Covid" },
   //  { id: 11, title: "Tax Document", complete: false, to: "Tax" },
-    { id: 12, title: "Background Check", complete: false, to: "BackgroundCheck" }
+    // { id: 12, title: "Background Check", complete: false, to: "BackgroundCheck" }
   ])
 
   const [profile, setProfile] = useState(null);
@@ -35,6 +35,7 @@ const Profile = ({ navigation }: { navigation: ScreenNavigationProp }) => {
   const fetchProfile = async () => {
     try {
       const result = await getProfile();
+      console.log("result profile", result);
       setProfile(result.profile);
       const updatedProfileData = ProfilePageData.map(item => {
         switch (item.title) {
@@ -42,10 +43,10 @@ const Profile = ({ navigation }: { navigation: ScreenNavigationProp }) => {
             return { ...item, complete: result.profile.status.account };
           case "Personal Information":
             return { ...item, complete: result.profile.status.personal };
-          case "Educational Attainment":
-            return { ...item, complete: result.profile.status.education };
-          case "Credentials/Licensing":
-            return { ...item, complete: result.profile.status.certification };
+          // case "Educational Attainment":
+          //   return { ...item, complete: result.profile.status.education };
+          // case "Credentials/Licensing":
+          //   return { ...item, complete: result.profile.status.certification };
           case "Competency/Skillset ":
             return { ...item, complete: result.profile.status.skill };
           case "Work Information":
@@ -68,13 +69,14 @@ const Profile = ({ navigation }: { navigation: ScreenNavigationProp }) => {
       });
       setProfilePageData(updatedProfileData);
     } catch (error: any) {
-      console.log(error.response.data.message);
+      console.log("error",error.response.data.message);
     }
   }
 
   useEffect(() => {
     fetchProfile();
   }, [refresh, isFocues])
+  
   if (!profile) return <Loading />
   return (
     <>

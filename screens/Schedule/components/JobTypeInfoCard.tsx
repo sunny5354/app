@@ -1,5 +1,5 @@
 import { Pressable, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Typography from '../../../components/Typography/Typography';
 import { JobDataProps } from '../../../types/jobs';
 import * as Linking from 'expo-linking';
@@ -7,12 +7,19 @@ import PatientProfile from '../../../components/PatientProfile';
 import DocumentProfile from '../../../components/DocumentProfile';
 import ClinicianBadge from '../../../components/ClinicianBadge';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { useIsFocused } from '@react-navigation/native';
 
 const JobTypeInfoCard = ({ data }: { data: JobDataProps }) => {
+  
   const [patientProfieModal, setPatientProfileModal] = useState(false);
   const [documentProfieModal, setDocumentProfileModal] = useState(false);
   const [clinicanBadgeModal, setClinicianBadgeModal] = useState(false);
 
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    setDocumentProfileModal(false);
+  },[isFocused]);
 
   return (
     <View className='bg-[#5280F7] rounded-lg px-4 py-6' style={{ gap: 2 }}>

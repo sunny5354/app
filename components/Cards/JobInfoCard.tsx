@@ -15,7 +15,7 @@ const JobInfoCard = ({ data }: { data: JobDataProps }) => {
       </View>
       <Typography variant='sm' class='text-white mt-2'>{data.agencyName}</Typography>
       <Typography class='text-white'>{data.jobType}</Typography>
-      <Typography variant='xl' class='text-white' >{data.taskType}</Typography>
+      <Typography variant='xl' class='text-white'>{data.taskType}</Typography>
       <Typography class='text-white'>{data.staffProfile}</Typography>
     </View>
   )

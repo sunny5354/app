@@ -26,7 +26,7 @@ import { ScreenNavigationProp } from '../../types/navigation';
 import { getDropDown } from '../../http/util/dropdown';
 import MenuDropDown from '../../components/DropDown';
 import { getStatus } from '../../http/home';
-import { getEducationCourseType } from '../../http/profile/education';
+import { getEducation, getEducationCourseType } from '../../http/profile/education';
 
 
 
@@ -43,25 +43,9 @@ const Credential = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [updateId, setUpdateId] = useState("");
 
-  const [selectedLicense,setSelectLicense] = useState<any>('');
-  const [licenseData, setLicenseData] = useState([{
-    label: "Nothing to show", value: "0"
-  }])
-
-
   const [selectedState, setSelectedState] = useState<selectedValueProp>({
     label: "Select State", value: "0"
   })
-
-  const credentialTypeData = [{
-    label: "Educational Attainment",
-    value: 1
-  },
-    {
-      label: 'Licensing & Credentials',
-      value: 2
-    }  
-  ]
 
   const [validateData, setvalidateData] = useState({
     label: "Select validity", value: "0"
@@ -102,17 +86,7 @@ const Credential = () => {
     }
   };
 
-  const handleFromDateChange = (selectedDate: any) => {
-    const currentDate = new Date(selectedDate.nativeEvent.timestamp);
-    setFromDate(currentDate);
-  };
-
   const [tillDate, setTillDate] = useState(new Date());
-
-  const handleTillDateChange = (selectedDate: any) => {
-    const currentDate = new Date(selectedDate.nativeEvent.timestamp);
-    setTillDate(currentDate);
-  };
 
   const fetchCoursetype = async () => {
     try {
@@ -127,12 +101,12 @@ const Credential = () => {
     credentialType: string;
     credentialName: string;
     institution: string;
-    city: "",
-    state: "",
-    issued: "",
-    hasValidity: "",
-    validUpTo: "",
-    certificate: ""
+    city: string;
+    state: string;
+    issued: string;
+    hasValidity: string;
+    validUpTo: string;
+    certificate: string;
   }
 
   const fetchStateDropDown = async () => {
@@ -241,12 +215,14 @@ const Credential = () => {
     setUploadedDoc({ name: data.certificate.name, url: data.certificate.url, _id: data.certificate._id });
     formik.setFieldValue("credentialType", data.credentialType);
     formik.setFieldValue("credentialName", data.credentialName);
-    formik.setFieldValue("institution", data.institution);
-    // formik.setFieldValue("year", data.year.toString());
-    const fromDate = new Date(data.validFrom);
-    setFromDate(fromDate);
-    const tillDate = new Date(data.validTo);
-    setTillDate(tillDate);
+    formik.setFieldValue("institution", data.institution); // @ts-ignore
+    formik.setFieldValue("city", data.city);
+    // const fromDate = new Date(data.validFrom);
+    // setFromDate(fromDate);
+    // const tillDate = new Date(data.validTo);
+    // setTillDate(tillDate);
+    setIssuedDate(new Date(data?.validFrom));
+    setvalildDate(new Date(data?.validTo));
     setIsUpdate(true);
     setUpdateId(data._id);
     if (scroll.current) {
@@ -258,6 +234,7 @@ const Credential = () => {
   const isFocused = useIsFocused();
   const [role, setRole] = useState<string | null>(null);
   const [userStatus, setUserStatus] = useState("Active");
+// getEducation
   const getUserStatus = async () => {
     try {
       const res = await getStatus();
@@ -287,10 +264,13 @@ const Credential = () => {
         credentialName: formik.values.credentialName,
         institution: formik.values.institution,
         state: selectedState.value,
-        certificate: uploadedDoc?._id!,
-        validFrom: fromDate.toString(),
-        validTo: tillDate.toString()
+        certificate: uploadedDoc?._id!, // @ts-ignore
+        validFrom: issuedDate.toString(),
+        validTo: valildDate.toString(),
+        hasValidity: validateData?.value,
+        city: formik.values.city
       }
+
       const result = await editCertification(obj, updateId);
       successToast(result.message ?? "Certification Updated");
       formik.resetForm();
@@ -309,6 +289,21 @@ const Credential = () => {
     try {
       const result = await getCertification();
       setCertifications(result.certifications);
+
+      if(result?.certifications[0]?.courseType) {
+        setCredentialType({ label: result.certifications[0].courseType, value: result.certifications[0].courseType });
+      }
+
+      if(result?.certifications[0]?.state) {
+        setSelectedState({ label: result.certifications[0].state, value: result.certifications[0].state });
+      }
+   
+      if(result?.certifications[0]?.hasValidity) {
+        setvalidateData({ label: "Yes", value: result.certifications[0].hasValidity });
+      } else {
+        setvalidateData({ label: "No", value: result.certifications[0].hasValidity });
+      }
+
     } catch (error: any) {
       console.log("certificates experience=>", error.response);
       errorToast(error.response.data.message ?? "Error Occured!");
@@ -324,35 +319,35 @@ const Credential = () => {
     fetchStateDropDown();
   }, [])
 
-  if (!certifications) return <Loading />
+  //if (!certifications) return <Loading />
 
   return (
     <View className='flex-1 relative bg-white'>
       <ScrollView ref={scroll} className='p-4 bg-white flex-1' contentContainerStyle={{ paddingBottom: 120 }}>
-        <Typography class='font-PoppinsSemiBold'>Add Credentials/Licensing</Typography>
-
-        <View className='mt-5' />
+        
+        <View className='mt-1' />
         <View className='flex-1' style={{ gap: 15 }}>
           {
-            certifications.length > 0 ?
-              certifications.map((v, i) => (
+            certifications?.length > 0 ?
+              certifications?.map((v, i) => (
                 <CertificationCard onUpdate={onUpdate} setRefresh={setRefresh} key={i} education={v} />
               ))
               :
               (
                 <View className='flex-1 justify-center items-center'>
-                  <Typography class='text-center'>No Credentials/Licensing Added</Typography>
+                  <Typography class='text-center'>No Licensing Credential Added</Typography>
                 </View>
               )
           }
         </View>
         <Divider />
+        <Typography class='font-PoppinsSemiBold bottom-2'>Add Licensing Credential</Typography>
         <View style={styles.backgroundShadow}>
           {/* @ts-ignore */}
           <MenuDropDown label='Select Credential Type*' name="credentialType" selectedValue={credentialType} setSelectedValue={setCredentialType} data={courseData} />
           <Input
             placeholder='Credential name'
-            label='Course Name*'
+            label='Credential Name*'
             value={formik.values.credentialName}
             onChangeText={formik.handleChange("credentialName")}
             onBlur={formik.handleBlur("credentialName")}

@@ -26,6 +26,9 @@ const DocumentInformation = ({ data }: { data: DocumentDataProps }) => {
     setPdfViewModal(true)
     setPdfObject(_pdfData)
   }
+
+
+  
   return (
     <View>
       {data.length > 0 ? data.map((item) => {

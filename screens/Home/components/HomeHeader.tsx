@@ -17,7 +17,7 @@ const HomeHeader = ({avatar}:{avatar:imagePdfFileTypeProps}) => {
       <Image
         source={whiteLogo}
         alt='white logo'
-        className='w-20 h-12'
+        className='w-20 h-16'
         resizeMode='contain'
       />
       {

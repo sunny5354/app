@@ -22,14 +22,16 @@ const InfoTypography = ({ label, value }: { label: string, value: string }) => {
 
 
 const TreatmentProfile = ({ data }: { data: PatientDetailProps }) => {
+  console.log("Treatment Profile Data", data);
   return (
     <View style={backgroundShadow.backgroundShadow}>
       <Typography class='font-PoppinsMedium' variant='sm'>Treatment Profile:</Typography>
       <View className='h-[1px] bg-border' />
       <View style={{ gap: 8 }}>
+        <InfoTypography label='Prognosis:' value={data?.prognosis} />
         <InfoTypography label='Treatment History:' value={data.treatment.treatmentHistory} />
-        <InfoTypography label='Symptoms:' value={data.treatment.symptoms} />
-        <InfoTypography label='Vital Signs:' value={data.treatment.vitalSigns} />
+        {/*        
+        <InfoTypography label='Vital Signs:' value={data.treatment.vitalSigns} /> */}
         <InfoTypography label='Medication Profile:' value={data.treatment.medicationProfile} />
         <InfoTypography label='Allergy Profile:' value={data.treatment.allergyProfile} />
       </View>

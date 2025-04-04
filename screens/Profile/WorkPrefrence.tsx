@@ -392,7 +392,6 @@ const WorkPrefrence = () => {
       <BottomButton
         // onPress={handleSubmit}
         onPress={formik.handleSubmit as (values: any) => any}
-        disabled={role === "agency-clinician" && userStatus !== "Active"}
         text='Save'
       />
     </View>
