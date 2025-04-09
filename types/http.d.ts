@@ -54,13 +54,13 @@ export type PersonalInfoProps = {
     "name": string,
     "designation": string,
     "organization": string,
-    "mobileNo": number
+    "mobileNo": string
   },
   professionalReference2?: {
     "name": string,
     "designation": string,
     "organization": string,
-    "mobileNo": number
+    "mobileNo": string
   },
 }
 

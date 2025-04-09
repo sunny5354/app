@@ -1,0 +1,49 @@
+{
+  "cli": {
+    "version": ">= 3.13.3"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1",
+        "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
+      },
+      "channel": "development"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "enterpriseProvisioning": "universal"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1",
+        "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
+      },
+      "channel": "preview"
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_BASE_URL": "https://acta-api.starpankaj.com/api/v1",
+        "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyBtLciMleXFQeWJ51FkfwPOFa5umnVmny8"
+      },
+      "channel": "production"
+    }
+  }, 
+  "submit": {
+    "production": {
+      "ios": {
+        "companyName": "Acta Clinician",
+        "appleId":"ganeshnegi004@gmail.com",
+        "ascAppId":"6738923189",
+        "appleTeamId":"58DAWYLUXX"
+      }
+
+    }
+  }
+}
